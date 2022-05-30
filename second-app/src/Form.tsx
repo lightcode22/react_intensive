@@ -4,7 +4,6 @@ import FormButton from "./components/FormButton";
 import FormTextArea from "./components/FormTextArea";
 import DatePicker from "./components/DatePicker";
 import FormInput from "./components/FormInput";
-import PhoneInput from "./components/PhoneInput";
 import * as validators from "./validators";
 
 type FormState = {
@@ -63,15 +62,18 @@ class Form extends React.Component<{}, FormState> {
 			projectError: validators.validateTextArea(this.state.project),
 		};
 
-		this.setState({
-			...formErrors,
+		this.setState(
+			{
+				...formErrors,
+			},
+			() => console.log(this.state)
+		);
+
+		const isFormValid = Object.values(formErrors).every((errorMessage) => {
+			return errorMessage === "";
 		});
 
-		const formHasErrors = Object.values(formErrors).some((errorMessage) => {
-			return errorMessage !== "";
-		});
-
-		if (formHasErrors) {
+		if (!isFormValid) {
 			alert("форма содержит ошибки");
 			return;
 		}
@@ -158,12 +160,14 @@ class Form extends React.Component<{}, FormState> {
 					</div>
 
 					<div className={styles.formGroup}>
-						<PhoneInput
+						<FormInput
 							labelText="Телефон"
+							name="phone"
 							errorMessage={this.state.phoneError}
 							value={this.state.phone}
 							onInputHandler={this.onPhoneInputHandler}
-							name="phone"
+							maxLength={12}
+							placeholder="7-7777-77-77"
 						/>
 						<DatePicker
 							labelText="Дата рождения"
