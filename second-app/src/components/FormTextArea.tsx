@@ -4,32 +4,41 @@ import styles from "../form.module.css";
 type TextAreaProps = {
 	labelText: string;
 	errorMessage: string;
-	onInputHandler: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
-	onBlurHandler: (e: React.FocusEvent<HTMLTextAreaElement>) => void;
 	name: string;
 	value: string;
+	onInputHandler: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+	onBlurHandler: (e: React.FocusEvent<HTMLTextAreaElement>) => void;
 };
 
 class FormTextArea extends React.Component<TextAreaProps> {
 	render() {
+		const {
+			labelText,
+			value,
+			errorMessage,
+			name,
+			onInputHandler,
+			onBlurHandler,
+		} = this.props;
+
 		return (
 			<div className={styles.formSubBlock}>
-				<label className={styles.label}>{this.props.labelText}</label>
+				<label className={styles.label}>{labelText}</label>
 				<div className={styles.inputBlock}>
 					<textarea
 						className={styles.textarea}
 						rows={7}
-						placeholder={this.props.labelText}
-						onInput={this.props.onInputHandler}
-						name={this.props.name}
+						placeholder={labelText}
+						onInput={onInputHandler}
+						name={name}
 						maxLength={600}
-						value={this.props.value}
-						onBlur={this.props.onBlurHandler}
+						value={value}
+						onBlur={onBlurHandler}
 					/>
 					<div className={styles.extraInfo}>
-						<div className={styles.errorInfo}>{this.props.errorMessage}</div>
+						<div className={styles.errorInfo}>{errorMessage}</div>
 						<div className={styles.remainingSymbolsInfo}>
-							Осталось {600 - this.props.value.length}/600 символов
+							Осталось {600 - value.length}/600 символов
 						</div>
 					</div>
 				</div>

@@ -8,15 +8,14 @@ type ButtonProps = {
 
 class FormButton extends React.Component<ButtonProps> {
 	render() {
+		const { text, type } = this.props;
+
 		const buttonType =
-			this.props.type === "submit" ? styles.buttonSubmit : styles.buttonReset;
+			type === "submit" ? styles.buttonSubmit : styles.buttonReset;
 
 		return (
-			<button
-				type={this.props.type}
-				className={`${styles.button} ${buttonType}`}
-			>
-				{this.props.text}
+			<button type={type} className={`${styles.button} ${buttonType}`}>
+				{text}
 			</button>
 		);
 	}

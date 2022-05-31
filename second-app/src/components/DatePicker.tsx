@@ -12,26 +12,33 @@ type DatePickerProps = {
 
 class DatePicker extends React.Component<DatePickerProps> {
 	render() {
+		const {
+			value,
+			name,
+			labelText,
+			errorMessage,
+			untilToday,
+			onChangeHandler,
+		} = this.props;
+
 		// если значение в атрибуте max не удовлетворяет формату yyyy-MM-dd,
 		// то элемент не будет иметь максимальной даты
-		const maxDate = this.props.untilToday
-			? new Date().toLocaleDateString("en-ca")
-			: "";
+		const maxDate = untilToday ? new Date().toLocaleDateString("en-ca") : "";
 
 		return (
 			<div className={styles.formSubBlock}>
-				<label className={styles.label}>{this.props.labelText}</label>
+				<label className={styles.label}>{labelText}</label>
 				<div className={styles.inputBlock}>
 					<input
 						type="date"
 						placeholder=""
 						className={styles.datePicker}
 						max={maxDate}
-						value={this.props.value}
-						onChange={this.props.onChangeHandler}
-						name={this.props.name}
+						value={value}
+						onChange={onChangeHandler}
+						name={name}
 					/>
-					<p className={styles.errorMessage}>{this.props.errorMessage}</p>
+					<p className={styles.errorMessage}>{errorMessage}</p>
 				</div>
 			</div>
 		);
