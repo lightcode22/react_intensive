@@ -25,27 +25,29 @@ type FormState = {
 	projectError: string;
 };
 
+const DEFAULT_STATE = {
+	firstName: "",
+	firstNameError: "",
+	lastName: "",
+	lastNameError: "",
+	phone: "",
+	phoneError: "",
+	dateOfBirth: "",
+	dateOfBirthError: "",
+	website: "",
+	websiteError: "",
+	aboutInfo: "",
+	aboutInfoError: "",
+	techStack: "",
+	techStackError: "",
+	project: "",
+	projectError: "",
+};
+
 class Form extends React.Component<{}, FormState> {
 	constructor(props: {}) {
 		super(props);
-		this.state = {
-			firstName: "",
-			firstNameError: "",
-			lastName: "",
-			lastNameError: "",
-			phone: "",
-			phoneError: "",
-			dateOfBirth: "",
-			dateOfBirthError: "",
-			website: "",
-			websiteError: "",
-			aboutInfo: "",
-			aboutInfoError: "",
-			techStack: "",
-			techStackError: "",
-			project: "",
-			projectError: "",
-		};
+		this.state = DEFAULT_STATE;
 	}
 
 	formSubmitHandler = (e: React.FormEvent) => {
@@ -62,12 +64,9 @@ class Form extends React.Component<{}, FormState> {
 			projectError: validators.validateTextArea(this.state.project),
 		};
 
-		this.setState(
-			{
-				...formErrors,
-			},
-			() => console.log(this.state)
-		);
+		this.setState({
+			...formErrors,
+		});
 
 		const isFormValid = Object.values(formErrors).every((errorMessage) => {
 			return errorMessage === "";
@@ -82,9 +81,7 @@ class Form extends React.Component<{}, FormState> {
 	};
 
 	formResetHandler = () => {
-		Object.keys(this.state).forEach((stateKey) =>
-			this.setState({ [stateKey]: "" } as Pick<FormState, keyof FormState>)
-		);
+		this.setState({ ...DEFAULT_STATE });
 	};
 
 	onInputHandler = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {

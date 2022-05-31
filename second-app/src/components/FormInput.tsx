@@ -6,33 +6,40 @@ type InputProps = {
 	name: string;
 	value: string;
 	errorMessage: string;
-	onInputHandler: (e: React.ChangeEvent<HTMLInputElement>) => void;
-	onBlurHandler?: (e: React.FocusEvent<HTMLInputElement>) => void;
 	placeholder?: string;
 	maxLength?: number;
+	onInputHandler: (e: React.ChangeEvent<HTMLInputElement>) => void;
+	onBlurHandler?: (e: React.FocusEvent<HTMLInputElement>) => void;
 };
 
 class FormInput extends React.Component<InputProps> {
 	render() {
+		const {
+			labelText,
+			placeholder,
+			maxLength,
+			errorMessage,
+			value,
+			name,
+			onBlurHandler,
+			onInputHandler,
+		} = this.props;
+
 		return (
 			<div className={styles.formSubBlock}>
-				<label className={styles.label}>{this.props.labelText}</label>
+				<label className={styles.label}>{labelText}</label>
 				<div className={styles.inputBlock}>
 					<input
 						type="text"
-						name={this.props.name}
+						name={name}
 						className={styles.input}
-						placeholder={this.props.placeholder || this.props.labelText}
-						value={this.props.value}
-						onInput={this.props.onInputHandler}
-						{...(this.props.maxLength
-							? { maxLength: this.props.maxLength }
-							: {})}
-						{...(this.props.onBlurHandler
-							? { onBlur: this.props.onBlurHandler }
-							: {})}
+						placeholder={placeholder || labelText}
+						value={value}
+						onInput={onInputHandler}
+						{...(maxLength ? { maxLength: maxLength } : {})}
+						{...(onBlurHandler ? { onBlur: onBlurHandler } : {})}
 					/>
-					<p className={styles.errorMessage}>{this.props.errorMessage}</p>
+					<p className={styles.errorMessage}>{errorMessage}</p>
 				</div>
 			</div>
 		);
