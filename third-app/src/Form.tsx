@@ -1,9 +1,10 @@
 import React, { ChangeEvent, FocusEvent, useReducer } from "react";
 import styles from "./form.module.css";
-import FormButton from "./components/FormButton";
-import FormTextArea from "./components/FormTextArea";
-import DatePicker from "./components/DatePicker";
-import FormInput from "./components/FormInput";
+import Modal from "./components/Modal";
+import FormButton from "./components/Form/FormButton";
+import FormTextArea from "./components/Form/FormTextArea";
+import DatePicker from "./components/Form/DatePicker";
+import FormInput from "./components/Form/FormInput";
 import {
 	validateInput,
 	validatePhone,
@@ -29,6 +30,8 @@ type FormState = {
 	techStackError: string;
 	project: string;
 	projectError: string;
+	isModalOpen: boolean;
+	modalMessage: string;
 };
 
 const DEFAULT_STATE = {
@@ -48,6 +51,8 @@ const DEFAULT_STATE = {
 	techStackError: "",
 	project: "",
 	projectError: "",
+	isModalOpen: false,
+	modalMessage: "",
 };
 
 const stateReducer = (state: FormState, updates: Partial<FormState>) => ({
@@ -60,7 +65,7 @@ export default function Form(props: {}, state: FormState) {
 		...DEFAULT_STATE,
 	});
 
-	const formSubmitHandler = (e: React.FormEvent) => {
+	const onFormSubmitHandler = (e: React.FormEvent) => {
 		e.preventDefault();
 
 		const formErrors = {
@@ -83,11 +88,17 @@ export default function Form(props: {}, state: FormState) {
 		);
 
 		if (!isFormValid) {
-			alert("форма содержит ошибки");
+			dispatchStateUpdates({
+				isModalOpen: true,
+				modalMessage: "форма содержит ошибки",
+			});
 			return;
 		}
 
-		alert("форма заполнена правильно!");
+		dispatchStateUpdates({
+			isModalOpen: true,
+			modalMessage: "форма заполнена правильно",
+		});
 	};
 
 	const formResetHandler = () => {
@@ -139,12 +150,16 @@ export default function Form(props: {}, state: FormState) {
 		});
 	};
 
+	const onModalCloseHandler = () => {
+		dispatchStateUpdates({ isModalOpen: false });
+	};
+
 	return (
 		<div>
 			<form
 				className={styles.form}
 				action="/"
-				onSubmit={formSubmitHandler}
+				onSubmit={onFormSubmitHandler}
 				onReset={formResetHandler}
 			>
 				<h2 className={styles.formHeading}>Создание анкеты</h2>
@@ -153,16 +168,16 @@ export default function Form(props: {}, state: FormState) {
 					<FormInput
 						labelText="Имя"
 						name="firstName"
-						errorMessage={state.firstNameError}
-						value={state.firstName}
+						errorMessage={formState.firstNameError}
+						value={formState.firstName}
 						onInputHandler={onInputHandler}
 						onBlurHandler={onBlurHandler}
 					/>
 					<FormInput
 						labelText="Фамилия"
 						name="lastName"
-						errorMessage={state.lastNameError}
-						value={state.lastName}
+						errorMessage={formState.lastNameError}
+						value={formState.lastName}
 						onInputHandler={onInputHandler}
 						onBlurHandler={onBlurHandler}
 					/>
@@ -172,8 +187,8 @@ export default function Form(props: {}, state: FormState) {
 					<FormInput
 						labelText="Телефон"
 						name="phone"
-						errorMessage={state.phoneError}
-						value={state.phone}
+						errorMessage={formState.phoneError}
+						value={formState.phone}
 						onInputHandler={onPhoneInputHandler}
 						maxLength={12}
 						placeholder="7-7777-77-77"
@@ -181,8 +196,8 @@ export default function Form(props: {}, state: FormState) {
 					<DatePicker
 						labelText="Дата рождения"
 						untilToday
-						value={state.dateOfBirth}
-						errorMessage={state.dateOfBirthError}
+						value={formState.dateOfBirth}
+						errorMessage={formState.dateOfBirthError}
 						onChangeHandler={datepickerChangeHandler}
 						name="dateOfBirth"
 					/>
@@ -191,8 +206,8 @@ export default function Form(props: {}, state: FormState) {
 				<FormInput
 					labelText="Сайт"
 					name="website"
-					errorMessage={state.websiteError}
-					value={state.website}
+					errorMessage={formState.websiteError}
+					value={formState.website}
 					onInputHandler={onInputHandler}
 					onBlurHandler={onBlurHandler}
 					placeholder="https://www.website.com"
@@ -200,28 +215,28 @@ export default function Form(props: {}, state: FormState) {
 
 				<FormTextArea
 					labelText="О себе"
-					errorMessage={state.aboutInfoError}
+					errorMessage={formState.aboutInfoError}
 					onInputHandler={onInputHandler}
 					name="aboutInfo"
-					value={state.aboutInfo}
+					value={formState.aboutInfo}
 					onBlurHandler={onBlurHandler}
 				/>
 
 				<FormTextArea
 					labelText="Стек технологий"
-					errorMessage={state.techStackError}
+					errorMessage={formState.techStackError}
 					onInputHandler={onInputHandler}
 					name="techStack"
-					value={state.techStack}
+					value={formState.techStack}
 					onBlurHandler={onBlurHandler}
 				/>
 
 				<FormTextArea
 					labelText="Описание последнего проекта"
-					errorMessage={state.projectError}
+					errorMessage={formState.projectError}
 					onInputHandler={onInputHandler}
 					name="project"
-					value={state.project}
+					value={formState.project}
 					onBlurHandler={onBlurHandler}
 				/>
 
@@ -230,6 +245,12 @@ export default function Form(props: {}, state: FormState) {
 					<FormButton type="submit" text="Сохранить" />
 				</div>
 			</form>
+
+			<Modal
+				isOpen={formState.isModalOpen}
+				message={formState.modalMessage}
+				onClose={onModalCloseHandler}
+			/>
 		</div>
 	);
 }
