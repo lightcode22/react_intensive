@@ -6,25 +6,6 @@ import DatePicker from "./components/DatePicker";
 import FormInput from "./components/FormInput";
 import * as validators from "./validators";
 
-type FormState = {
-	firstName: string;
-	firstNameError: string;
-	lastName: string;
-	lastNameError: string;
-	phone: string;
-	phoneError: string;
-	dateOfBirth: string;
-	dateOfBirthError: string;
-	website: string;
-	websiteError: string;
-	aboutInfo: string;
-	aboutInfoError: string;
-	techStack: string;
-	techStackError: string;
-	project: string;
-	projectError: string;
-};
-
 const DEFAULT_STATE = {
 	firstName: "",
 	firstNameError: "",
@@ -44,13 +25,13 @@ const DEFAULT_STATE = {
 	projectError: "",
 };
 
-class Form extends React.Component<{}, FormState> {
-	constructor(props: {}) {
+class Form extends React.Component {
+	constructor(props) {
 		super(props);
 		this.state = DEFAULT_STATE;
 	}
 
-	formSubmitHandler = (e: React.FormEvent) => {
+	formSubmitHandler = (e) => {
 		e.preventDefault();
 
 		const formErrors = {
@@ -84,14 +65,11 @@ class Form extends React.Component<{}, FormState> {
 		this.setState({ ...DEFAULT_STATE });
 	};
 
-	onInputHandler = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-		this.setState({ [e.target.name]: e.target.value } as Pick<
-			FormState,
-			keyof FormState
-		>);
+	onInputHandler = (e) => {
+		this.setState({ [e.target.name]: e.target.value });
 	};
 
-	onPhoneInputHandler = (e: ChangeEvent<HTMLInputElement>) => {
+	onPhoneInputHandler = (e) => {
 		// разбивка номера на фрагменты
 		const n = e.target.value
 			.replace(/\D/g, "")
@@ -111,19 +89,19 @@ class Form extends React.Component<{}, FormState> {
 		this.setState({ phone: formattedValue });
 	};
 
-	datepickerChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+	datepickerChangeHandler = (e) => {
 		this.setState({ dateOfBirth: e.target.value });
 	};
 
 	// trim строки выполняется только при снятии фокуса с input/textarea
 	// это позволяет использовать пробелы во время ввода текста
-	onBlurHandler = (e: FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+	onBlurHandler = (e) => {
 		const currentInputError = e.target.name + "Error";
 
 		this.setState({
 			[e.target.name]: e.target.value.trim(),
 			[currentInputError]: "",
-		} as Pick<FormState, keyof FormState>);
+		});
 	};
 
 	render() {
