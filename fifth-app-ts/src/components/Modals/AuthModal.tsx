@@ -32,8 +32,6 @@ export default function AuthModal() {
 				new FormData(e.target as HTMLFormElement)
 			);
 
-			console.log(formFields);
-
 			// имитация проверки пары логин/пароль
 			if (formFields.login === username && formFields.password === password) {
 				dispatch({ type: "login", username });
