@@ -2,9 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import spinner from "../spinner.svg";
 import styles from "./styles.module.css";
 
-export default function ImageContainer(props) {
-	const { src, alt = "" } = props;
-
+export default function ImageContainer({ src, alt = "" }) {
 	const imageRef = useRef();
 	const [isLoaded, setIsLoaded] = useState(false);
 

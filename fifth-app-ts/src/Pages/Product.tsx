@@ -30,6 +30,8 @@ function calculateQuantity(rate: number) {
 	return floored % 2 === 0 ? 0 : floored;
 }
 
+const PRODUCT_API_URL = "https://fakestoreapi.com/products/";
+
 export default function Product() {
 	const { id } = useParams<keyof URLParamsType>() as URLParamsType;
 
@@ -50,7 +52,7 @@ export default function Product() {
 			setProduct({ ...thisProduct, quantityInStock });
 			setIsFetching(false);
 		} else {
-			fetch(`https://fakestoreapi.com/products/${id}`)
+			fetch(PRODUCT_API_URL + id)
 				.then((res) => res.json())
 				.then((json) => {
 					setProduct(json);

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import ImageContainer from "../ImageContainer";
 import ProductPurchaseBlock from "../ProductPurchaseBlock";
@@ -10,8 +10,6 @@ import styles from "./homepage.module.css";
 const isInStock = (rating) => Math.floor(rating) % 2 === 1;
 
 export default function ProductCard({ product }) {
-	useEffect(() => {}, []);
-
 	return (
 		<div className={styles.productCard}>
 			<div className={styles.productImage}>

@@ -6,6 +6,8 @@ import ProductPurchaseBlock from "../components/ProductPurchaseBlock";
 import { getProductById } from "../helpers";
 import styles from "./styles.module.css";
 
+const PRODUCT_API_URL = "https://fakestoreapi.com/products/";
+
 function calculateQuantity(rate) {
 	const floored = Math.floor(rate);
 	return floored % 2 === 0 ? 0 : floored;
@@ -31,7 +33,7 @@ export default function Product() {
 			setProduct({ ...thisProduct, quantityInStock });
 			setIsFetching(false);
 		} else {
-			fetch(`https://fakestoreapi.com/products/${id}`)
+			fetch(PRODUCT_API_URL + id)
 				.then((res) => res.json())
 				.then((json) => {
 					setProduct(json);

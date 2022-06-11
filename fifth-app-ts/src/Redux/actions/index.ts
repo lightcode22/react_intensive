@@ -1,9 +1,11 @@
 import { DispatchType } from "../store";
 
+const PRODUCTS_API_URL = "https://fakestoreapi.com/products";
+
 export const fetchAllProducts = () => (dispatch: DispatchType) => {
 	dispatch({ type: "fetching_started" });
 
-	fetch("https://fakestoreapi.com/products")
+	fetch(PRODUCTS_API_URL)
 		.then((res) => res.json())
 		.then((json) => {
 			dispatch({ type: "cache_products", payload: json });

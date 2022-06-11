@@ -3,19 +3,7 @@ import { Link } from "react-router-dom";
 import cartIcon from "../../cart-icon.svg";
 import styles from "./styles.module.css";
 
-export default function NavigationCartBlock(props) {
-	const { cart } = props;
-
-	// let totalQuantity = 0;
-	// let totalPrice = 0;
-
-	// for (let id in cart) {
-	// 	const item = cart[id];
-
-	// 	totalQuantity += item.quantity;
-	// 	totalPrice += item.quantity * item.price;
-	// }
-
+export default function NavigationCartBlock({ cart }) {
 	return (
 		<span className={styles.cartItemsInfo}>
 			<Link to="/cart">

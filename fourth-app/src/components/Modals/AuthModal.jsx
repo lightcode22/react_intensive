@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { ShopContext } from "../../Context/ShopContext";
 import styles from "./styles.module.css";
 
+const USER_API = "https://fakestoreapi.com/users/1";
+
 export default function AuthModal({ isOpen, onClose }) {
 	const { setUser, setFlashError } = useContext(ShopContext);
 	const navigate = useNavigate();
@@ -18,7 +20,7 @@ export default function AuthModal({ isOpen, onClose }) {
 
 		try {
 			// имитация запроса к БД
-			const response = await fetch("https://fakestoreapi.com/users/1");
+			const response = await fetch(USER_API);
 
 			const { username, password } = await response.json();
 

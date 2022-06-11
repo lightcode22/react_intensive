@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import styles from "./styles.module.css";
 
+const USER_API_URL = "https://fakestoreapi.com/users/1";
+
 export default function AuthModal() {
 	const isOpen = useSelector(
 		(state: RootStateType) => state.authModal.isAuthModalOpen
@@ -22,7 +24,7 @@ export default function AuthModal() {
 
 		try {
 			// имитация запроса к БД
-			const response = await fetch("https://fakestoreapi.com/users/1");
+			const response = await fetch(USER_API_URL);
 
 			const { username, password } = await response.json();
 

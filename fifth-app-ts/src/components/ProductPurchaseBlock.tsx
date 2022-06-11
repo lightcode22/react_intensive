@@ -9,9 +9,11 @@ type PropsType = {
 	quantity?: number;
 };
 
-export default function ProductPurchaseBlock(props: PropsType) {
-	const { quantity = 1, productId, productPrice } = props;
-
+export default function ProductPurchaseBlock({
+	quantity = 1,
+	productId,
+	productPrice,
+}: PropsType) {
 	const user = useSelector((state: RootStateType) => state.user.username);
 
 	const dispatch = useDispatch();

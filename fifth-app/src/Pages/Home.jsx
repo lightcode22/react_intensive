@@ -2,7 +2,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchAllProducts } from "../Redux/actions";
 import Loader from "../components/Loader";
 import ProductsSection from "../components/home/ProductsSection";
-import { useEffect } from "react";
 
 export default function Home() {
 	const isFetching = useSelector((state) => state.products.isFetching);

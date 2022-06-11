@@ -6,9 +6,7 @@ type PropsType = {
 	onClick: () => void;
 };
 
-export default function Button(props: PropsType) {
-	const { children, onClick } = props;
-
+export default function Button({ children, onClick }: PropsType) {
 	return (
 		<button type="button" className={styles.button} onClick={onClick}>
 			{children}

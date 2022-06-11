@@ -7,9 +7,7 @@ type PropsType = {
 	alt?: string;
 };
 
-export default function ImageContainer(props: PropsType) {
-	const { src, alt = "" } = props;
-
+export default function ImageContainer({ src, alt = "" }: PropsType) {
 	const imageRef = useRef<HTMLImageElement>(null);
 	const [isLoaded, setIsLoaded] = useState(false);
 

@@ -3,8 +3,11 @@ import { ShopContext } from "../Context/ShopContext";
 import Button from "./Button";
 import styles from "./styles.module.css";
 
-export default function ProductPurchaseBlock(props) {
-	const { quantity, productId, productPrice } = props;
+export default function ProductPurchaseBlock({
+	quantity,
+	productId,
+	productPrice,
+}) {
 	const { user, cart, setCart } = useContext(ShopContext);
 
 	const addToCartHandler = () => {

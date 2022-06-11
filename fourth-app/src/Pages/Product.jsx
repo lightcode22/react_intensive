@@ -5,6 +5,8 @@ import ImageContainer from "../components/ImageContainer";
 import ProductPurchaseBlock from "../components/ProductPurchaseBlock";
 import styles from "./styles.module.css";
 
+const PRODUCT_API = "https://fakestoreapi.com/products/";
+
 const calculateQuantity = (rate) => {
 	const floored = Math.floor(rate);
 	return floored % 2 === 0 ? 0 : floored;
@@ -18,7 +20,7 @@ export default function Product() {
 	const { setFlashError } = useContext(ShopContext);
 
 	useEffect(() => {
-		fetch(`https://fakestoreapi.com/products/${id}`)
+		fetch(PRODUCT_API + id)
 			.then((res) => res.json())
 			.then((json) => {
 				const quantity = calculateQuantity(json.rating.rate);

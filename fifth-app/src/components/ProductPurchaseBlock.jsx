@@ -2,9 +2,11 @@ import { useSelector, useDispatch } from "react-redux";
 import Button from "./Button";
 import styles from "./styles.module.css";
 
-export default function ProductPurchaseBlock(props) {
-	const { quantity = 1, productId, productPrice } = props;
-
+export default function ProductPurchaseBlock({
+	quantity = 1,
+	productId,
+	productPrice,
+}) {
 	const user = useSelector((state) => state.user.username);
 
 	const dispatch = useDispatch();
