@@ -1,11 +1,20 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { ShopContext } from "../Context/ShopContext";
 import Button from "./Button";
 import styles from "./styles.module.css";
 
+interface Cart {
+	[key: number]: {
+		price: number;
+		quantity: number;
+	};
+}
+
+type CartType = Cart | {};
+
 export default function ProductPurchaseBlock(props) {
 	const { quantity, productId, productPrice } = props;
-	const { user, cart, setCart } = useContext(ShopContext);
+	const { user, cart, setCart }: { cart: CartType } = useContext(ShopContext);
 
 	const addToCartHandler = () => {
 		let quantityToAdd = 1;
@@ -29,6 +38,10 @@ export default function ProductPurchaseBlock(props) {
 			}));
 		}
 	};
+
+	useEffect(() => {
+		console.log(cart);
+	});
 
 	return (
 		<>

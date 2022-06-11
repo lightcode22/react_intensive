@@ -1,0 +1,39 @@
+.productBlock {
+	display: flex;
+	justify-content: space-between;
+}
+
+.infoBlock {
+	flex: 1;
+	padding: 0 64px;
+}
+
+.productImage {
+	width: 300px;
+	height: 300px;
+	object-fit: contain;
+}
+
+.productTitle {
+	font-size: 18px;
+	font-weight: 500;
+	padding: 0;
+	margin: 0 0 40px;
+}
+
+.productPrice {
+	font-weight: 600;
+}
+
+.productDescription {
+	margin: 48px 0;
+}
+
+.purchaseBlock {
+	display: flex;
+	justify-content: space-between;
+}
+
+.errorPage {
+	text-align: center;
+}

@@ -1,0 +1,30 @@
+.navigationBar {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+
+	padding: 16px 32px;
+
+	background-color: #046e8f;
+
+	margin-bottom: 80px;
+}
+.navLinks {
+	display: flex;
+	margin-top: -6px;
+}
+
+.navLink {
+	margin: 0 16px;
+	font-weight: 500;
+	color: white;
+}
+
+.active {
+	color: #f7cc71;
+}
+
+.cartItemsInfo {
+	color: white;
+	margin-right: 32px;
+}
