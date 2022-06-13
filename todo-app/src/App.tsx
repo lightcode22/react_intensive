@@ -1,27 +1,22 @@
 import store from "./Redux/store";
 import { Provider } from "react-redux";
-import logo from "./logo.svg";
 import "./App.css";
+import NewTaskForm from "./components/NewTaskForm";
+import Filters from "./components/Filters";
+import TaskSection from "./components/TaskSection";
+import FlashErrorModal from "./components/Modals/flashErrorModal";
+import TaskActionModal from "./components/Modals/taskActionModal";
 
 function App() {
 	return (
 		<Provider store={store}>
-			<div className="App">
-				<header className="App-header">
-					<img src={logo} className="App-logo" alt="logo" />
-					<p>
-						Edit <code>src/App.tsx</code> and save to reload.
-					</p>
-					<a
-						className="App-link"
-						href="https://reactjs.org"
-						target="_blank"
-						rel="noopener noreferrer"
-					>
-						Learn React
-					</a>
-				</header>
+			<div className="container">
+				<NewTaskForm />
+				<Filters />
+				<TaskSection />
 			</div>
+			<TaskActionModal />
+			<FlashErrorModal />
 		</Provider>
 	);
 }

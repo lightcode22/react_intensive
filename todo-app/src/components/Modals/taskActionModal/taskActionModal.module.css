@@ -1,0 +1,63 @@
+.modalWindow {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-color: #fff;
+	padding: 32px;
+	width: 480px;
+	z-index: 9999;
+}
+
+.modalHeading {
+	display: flex;
+	justify-content: space-between;
+}
+
+.modalHeadingText {
+	margin: 0;
+}
+
+.title {
+	padding: 40px 0;
+	text-align: center;
+}
+
+.closeButton {
+	border: 1px solid black;
+	background-color: white;
+	padding: 4px 8px;
+	font-weight: 600;
+	font-size: 18px;
+	border-radius: 4px;
+}
+
+.buttonsBlock {
+	display: flex;
+	justify-content: center;
+}
+
+.button {
+	margin: 0 24px;
+	padding: 8px 16px;
+	border-radius: 8px;
+	border: none;
+}
+
+.green {
+	background-color: green;
+	color: white;
+}
+
+.green:hover {
+	background-color: rgb(2, 94, 2);
+}
+
+.red {
+	background-color: orangered;
+	color: white;
+}
+
+.red:hover {
+	background-color: rgb(196, 55, 4);
+}
