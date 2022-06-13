@@ -1,0 +1,30 @@
+.taskItem {
+	display: flex;
+	justify-content: space-between;
+	padding: 24px 32px;
+	background-color: brown;
+	margin: 24px 0;
+	border-radius: 16px;
+}
+
+.taskHeading {
+	display: flex;
+	align-items: center;
+}
+
+.star {
+	margin-right: 16px;
+	cursor: pointer;
+}
+
+.taskTitle {
+	margin: 0;
+}
+
+.done {
+	background-color: rgb(187 247 208);
+}
+
+.inProgress {
+	background-color: rgb(226 232 240);
+}

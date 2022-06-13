@@ -1,0 +1,13 @@
+.flashMessage {
+	background-color: orangered;
+	color: white;
+	position: fixed;
+	bottom: 0;
+	right: 0;
+	padding: 4px;
+	z-index: 9999;
+}
+
+.flashText {
+	padding: 0 16px 0 8px;
+}

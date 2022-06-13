@@ -1,0 +1,5 @@
+.filtersBlock {
+	display: flex;
+	justify-content: center;
+	margin: 24px 0;
+}
