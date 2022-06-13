@@ -10,16 +10,9 @@ import { AnyAction } from "redux";
 import { TaskType } from "../../../Redux/reducers/tasksReducer";
 import styles from "./taskItem.module.css";
 
-type TaskTypeNotRequired = {
-	id?: number;
-	title?: string;
-	completed?: boolean;
-	favourite?: boolean;
-	createdOn?: Date;
-};
-
-export default function TaskItem({ task }: { task: TaskTypeNotRequired }) {
+export default function TaskItem({ task }: { task: TaskType }) {
 	const status = task.completed ? "done" : "inProgress";
+
 	const dispatch = useDispatch();
 
 	const [isEditModeOn, setIsEditModeOn] = useState(false);
@@ -35,8 +28,8 @@ export default function TaskItem({ task }: { task: TaskTypeNotRequired }) {
 	const onStarClickHandler = () => {
 		(dispatch as ThunkDispatch<RootStateType, unknown, AnyAction>)(
 			updateTask({
-				...(task as TaskType),
-				favourite: !(task as TaskType).favourite,
+				...task,
+				favourite: !task.favourite,
 			})
 		);
 	};

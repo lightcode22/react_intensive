@@ -1,85 +1,81 @@
 import { TaskType } from "../reducers/tasksReducer";
 import { DispatchType } from "../store";
 
-const GET_TASKS_API_URL = "http://wtfreactapp.pythonanywhere.com/";
-const POST_TASKS_API_URL = "http://wtfreactapp.pythonanywhere.com/task";
+const GET_TASKS_API_URL = "https://wtfreactapp.pythonanywhere.com/";
+const POST_TASKS_API_URL = "https://wtfreactapp.pythonanywhere.com/task";
 
-export const fetchAllTasks = () => (dispatch: DispatchType) => {
+export const fetchAllTasks = () => async (dispatch: DispatchType) => {
 	dispatch({ type: "fetching_started" });
 
-	fetch(GET_TASKS_API_URL)
-		.then((res) => {
-			return res.json();
-		})
-		.then((json) => {
-			dispatch({ type: "cache_tasks", payload: json });
-			dispatch({ type: "fetching_done" });
-		})
-		.catch((err) => {
-			dispatch({ type: "fetching_done" });
-			dispatch({ type: "set_flash_error", message: err.message });
-		});
+	try {
+		const response = await fetch(GET_TASKS_API_URL);
+		const data = await response.json();
+		dispatch({ type: "cache_tasks", payload: data });
+	} catch (err: any) {
+		dispatch({ type: "cache_tasks", payload: [] });
+		dispatch({ type: "set_flash_error", message: err.message });
+	} finally {
+		dispatch({ type: "fetching_done" });
+	}
 };
 
-export const addNewTask = (data: string) => (dispatch: DispatchType) => {
-	fetch(POST_TASKS_API_URL, {
-		method: "POST",
-		mode: "cors",
-		cache: "no-cache",
-		credentials: "same-origin",
-		headers: {
-			"Content-Type": "application/json",
-		},
-		body: JSON.stringify({ title: data }),
-	})
-		.then((res) => {
-			console.log(res);
-			return res.json();
-		})
-		.then((json) => {
-			dispatch({ type: "cache_tasks", payload: json });
-		})
-		.catch((err) => {
-			dispatch({ type: "set_flash_error", message: err.message });
+export const addNewTask = (title: string) => async (dispatch: DispatchType) => {
+	try {
+		const response = await fetch(POST_TASKS_API_URL, {
+			method: "POST",
+			mode: "cors",
+			cache: "no-cache",
+			credentials: "same-origin",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({ title }),
 		});
+
+		const data = await response.json();
+		dispatch({ type: "cache_tasks", payload: data });
+	} catch (err: any) {
+		dispatch({ type: "set_flash_error", message: err.message });
+	}
 };
 
-export const updateTask = (data: TaskType) => (dispatch: DispatchType) => {
-	fetch(POST_TASKS_API_URL, {
-		method: "PUT",
-		mode: "cors",
-		cache: "no-cache",
-		credentials: "same-origin",
-		headers: {
-			"Content-Type": "application/json",
-		},
-		body: JSON.stringify({ ...data }),
-	})
-		.then((res) => res.json())
-		.then((json) => {
-			dispatch({ type: "cache_tasks", payload: json });
-		})
-		.catch((err) => {
-			dispatch({ type: "set_flash_error", message: err.message });
-		});
-};
+export const updateTask =
+	(newTask: TaskType) => async (dispatch: DispatchType) => {
+		try {
+			const response = await fetch(POST_TASKS_API_URL, {
+				method: "PUT",
+				mode: "cors",
+				cache: "no-cache",
+				credentials: "same-origin",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({ ...newTask }),
+			});
 
-export const removeTask = (id: number) => (dispatch: DispatchType) => {
-	fetch(`${POST_TASKS_API_URL}/${id}`, {
-		method: "DELETE",
-		mode: "cors",
-		cache: "no-cache",
-		credentials: "same-origin",
-		headers: {
-			"Content-Type": "application/json",
-		},
-		body: JSON.stringify({}),
-	})
-		.then((res) => res.json())
-		.then((json) => {
-			dispatch({ type: "cache_tasks", payload: json });
-		})
-		.catch((err) => {
+			const data = await response.json();
+			dispatch({ type: "cache_tasks", payload: data });
+		} catch (err: any) {
 			dispatch({ type: "set_flash_error", message: err.message });
+		}
+	};
+
+export const removeTask = (id: number) => async (dispatch: DispatchType) => {
+	try {
+		const response = await fetch(`${POST_TASKS_API_URL}/${id}`, {
+			method: "DELETE",
+			mode: "cors",
+			cache: "no-cache",
+			credentials: "same-origin",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({}),
 		});
+
+		const data = await response.json();
+		dispatch({ type: "cache_tasks", payload: data });
+	} catch (err: any) {
+		dispatch({ type: "set_flash_error", message: err.message });
+	}
 };

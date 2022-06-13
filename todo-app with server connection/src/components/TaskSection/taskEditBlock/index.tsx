@@ -7,21 +7,13 @@ import { AnyAction } from "redux";
 import { updateTask } from "../../../Redux/actions";
 import { TaskType } from "../../../Redux/reducers/tasksReducer";
 
-type TaskTypeNotRequired = {
-	id?: number;
-	title?: string;
-	completed?: boolean;
-	favourite?: boolean;
-	createdOn?: Date;
-};
-
 type PropsType = {
-	task: TaskTypeNotRequired;
+	task: TaskType;
 	onSubmitHander: () => void;
 };
 
 export default function TaskEditBlock({ task, onSubmitHander }: PropsType) {
-	const [inputText, setInputText] = useState(task.title as string);
+	const [inputText, setInputText] = useState(task.title);
 	const [hasError, setHasError] = useState(false);
 
 	const inputRef = useRef<HTMLInputElement>(null);
@@ -46,7 +38,7 @@ export default function TaskEditBlock({ task, onSubmitHander }: PropsType) {
 		if (e.key === "Enter") {
 			if (!hasError) {
 				(dispatch as ThunkDispatch<RootStateType, unknown, AnyAction>)(
-					updateTask({ ...(task as TaskType), title: inputText })
+					updateTask({ ...task, title: inputText })
 				);
 				onSubmitHander();
 			}
@@ -60,6 +52,7 @@ export default function TaskEditBlock({ task, onSubmitHander }: PropsType) {
 					`превышен лимит текста задачи на ${inputText.length - 160} символов`}
 			</p>
 			<input
+				className={styles.input}
 				ref={inputRef}
 				value={inputText}
 				onInput={onInputHandler}

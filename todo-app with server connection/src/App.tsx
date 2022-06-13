@@ -5,7 +5,7 @@ import NewTaskForm from "./components/NewTaskForm";
 import Filters from "./components/Filters";
 import TaskSection from "./components/TaskSection";
 import FlashErrorModal from "./components/Modals/flashErrorModal";
-import TaskActionModal from "./components/Modals/taskActionModal";
+import RemoveTaskModal from "./components/Modals/removeTaskModal";
 
 function App() {
 	return (
@@ -15,7 +15,7 @@ function App() {
 				<Filters />
 				<TaskSection />
 			</div>
-			<TaskActionModal />
+			<RemoveTaskModal />
 			<FlashErrorModal />
 		</Provider>
 	);

@@ -3,8 +3,8 @@ import { useDispatch } from "react-redux";
 import styles from "./taskEditBlock.module.css";
 
 type PropsType = {
-	id?: number | null;
-	title?: string;
+	id: number | null;
+	title: string;
 	onSubmitHander: () => void;
 };
 
@@ -13,7 +13,7 @@ export default function TaskEditBlock({
 	title,
 	onSubmitHander,
 }: PropsType) {
-	const [inputText, setInputText] = useState(title as string);
+	const [inputText, setInputText] = useState(title);
 	const [hasError, setHasError] = useState(false);
 
 	const inputRef = useRef<HTMLInputElement>(null);
@@ -50,6 +50,7 @@ export default function TaskEditBlock({
 					`превышен лимит текста задачи на ${inputText.length - 160} символов`}
 			</p>
 			<input
+				className={styles.input}
 				ref={inputRef}
 				value={inputText}
 				onInput={onInputHandler}

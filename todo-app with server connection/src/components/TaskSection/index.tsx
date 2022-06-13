@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { RootStateType } from "../../Redux/store";
 import { ThunkDispatch } from "redux-thunk";
@@ -5,7 +6,6 @@ import { AnyAction } from "redux";
 import { fetchAllTasks } from "../../Redux/actions";
 import Loader from "../Loader";
 import TaskList from "./taskList";
-import { TaskType } from "../../Redux/reducers/tasksReducer";
 
 export default function TaskSection() {
 	const isFetching = useSelector(
@@ -16,15 +16,15 @@ export default function TaskSection() {
 
 	const tasksToShow = allTasks.filter((task) => {
 		if (filter === "done") {
-			return (task as TaskType).completed;
+			return task.completed;
 		}
 
 		if (filter === "inProcess") {
-			return !(task as TaskType).completed;
+			return !task.completed;
 		}
 
 		if (filter === "favourite") {
-			return (task as TaskType).favourite && !(task as TaskType).completed;
+			return task.favourite && !task.completed;
 		}
 
 		return task;
@@ -32,11 +32,13 @@ export default function TaskSection() {
 
 	const dispatch = useDispatch();
 
-	if (allTasks.length === 0 && !isFetching) {
-		(dispatch as ThunkDispatch<RootStateType, unknown, AnyAction>)(
-			fetchAllTasks()
-		);
-	}
+	useEffect(() => {
+		if (allTasks.length === 0 && !isFetching) {
+			(dispatch as ThunkDispatch<RootStateType, unknown, AnyAction>)(
+				fetchAllTasks()
+			);
+		}
+	}, []);
 
 	return (
 		<section>

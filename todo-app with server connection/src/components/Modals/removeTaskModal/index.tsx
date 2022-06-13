@@ -1,5 +1,8 @@
 import { RootStateType } from "../../../Redux/store";
 import { useSelector, useDispatch } from "react-redux";
+import { removeTask } from "../../../Redux/actions";
+import { ThunkDispatch } from "redux-thunk";
+import { AnyAction } from "redux";
 import styles from "./taskActionModal.module.css";
 
 export default function TaskActionModal() {
@@ -19,7 +22,11 @@ export default function TaskActionModal() {
 	};
 
 	const onRemoveTaskHandler = () => {
-		dispatch({ type: "remove_task", id });
+		if (id) {
+			(dispatch as ThunkDispatch<RootStateType, unknown, AnyAction>)(
+				removeTask(id)
+			);
+		}
 		dispatch({ type: "close_action_modal" });
 	};
 

@@ -54,7 +54,7 @@ export default function NewTaskForm() {
 						onInput={onInputHandler}
 					/>
 					<button type="submit" className={styles.formButton}>
-						<img src={plus} className={styles.buttonIcon} />
+						<img src={plus} className={styles.buttonIcon} alt="plus_icon" />
 					</button>
 				</div>
 			</form>

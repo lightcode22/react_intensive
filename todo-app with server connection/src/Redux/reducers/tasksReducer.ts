@@ -7,7 +7,7 @@ export type TaskType = {
 };
 
 type TasksStateType = {
-	allTasks: {}[];
+	allTasks: TaskType[];
 	isFetching: boolean;
 	filter: string;
 };

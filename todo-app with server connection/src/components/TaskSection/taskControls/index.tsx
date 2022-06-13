@@ -6,22 +6,14 @@ import styles from "./taskControls.module.css";
 import { ThunkDispatch } from "redux-thunk";
 import { RootStateType } from "../../../Redux/store";
 import { AnyAction } from "redux";
-import { updateTask, removeTask } from "../../../Redux/actions";
+import { updateTask } from "../../../Redux/actions";
 import { TaskType } from "../../../Redux/reducers/tasksReducer";
-
-type PropsType = {
-	id?: number;
-	completed?: boolean;
-	favourite?: boolean;
-	title?: string;
-	createdOn?: Date;
-};
 
 export default function TaskControls({
 	task,
 	onEditHandler,
 }: {
-	task?: PropsType;
+	task: TaskType;
 	onEditHandler: () => void;
 }) {
 	const [showDropDown, setShowDropDown] = useState(false);
@@ -38,8 +30,8 @@ export default function TaskControls({
 		setShowDropDown(false);
 		(dispatch as ThunkDispatch<RootStateType, unknown, AnyAction>)(
 			updateTask({
-				...(task as TaskType),
-				favourite: !(task as PropsType).favourite,
+				...task,
+				favourite: !task.favourite,
 			})
 		);
 	};
@@ -48,17 +40,20 @@ export default function TaskControls({
 		setShowDropDown(false);
 		(dispatch as ThunkDispatch<RootStateType, unknown, AnyAction>)(
 			updateTask({
-				...(task as TaskType),
-				completed: !(task as PropsType).completed,
+				...task,
+				completed: !task.completed,
 			})
 		);
 	};
 
 	const onRemoveClickHandler = () => {
 		setShowDropDown(false);
-		(dispatch as ThunkDispatch<RootStateType, unknown, AnyAction>)(
-			removeTask((task as PropsType).id as number)
-		);
+		dispatch({
+			type: "open_remove_modal",
+			id: task.id,
+			title: task.title,
+			createdOn: task.createdOn,
+		});
 	};
 
 	const onEditClickHandler = () => {
@@ -86,12 +81,10 @@ export default function TaskControls({
 				} `}
 			>
 				<li onClick={onFavouriteClickHandler}>
-					{(task as PropsType).favourite
-						? "Убрать из избранного"
-						: "В избранное"}
+					{task.favourite ? "Убрать из избранного" : "В избранное"}
 				</li>
 				<li onClick={onCompleteClickHandler}>
-					{(task as PropsType).completed ? "Вернуть в работу" : "Выполнено"}
+					{task.completed ? "Вернуть в работу" : "Выполнено"}
 				</li>
 				<li onClick={onEditClickHandler}>Редактировать</li>
 				<li onClick={onRemoveClickHandler}>Удалить</li>

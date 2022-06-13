@@ -1,13 +1,6 @@
 import TaskItem from "../taskItem";
 import styles from "./taskList.module.css";
-
-type TaskType = {
-	id?: number;
-	title?: string;
-	completed?: boolean;
-	favourite?: boolean;
-	createdOn?: Date;
-};
+import { TaskType } from "../../../Redux/reducers/tasksReducer";
 
 export default function TaskList({ tasks }: { tasks: TaskType[] }) {
 	return (
