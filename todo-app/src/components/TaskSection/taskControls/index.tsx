@@ -1,7 +1,7 @@
 import { useState, useRef } from "react";
 import { useDispatch } from "react-redux";
 import burger from "../../../burger.svg";
-import PopupOverlay from "../../Modals/PopupOverlay";
+import PopupOverlay from "../../Modals/popupOverlay";
 import styles from "./taskControls.module.css";
 
 type PropsType = {
