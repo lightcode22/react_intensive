@@ -1,6 +1,6 @@
-import { RootStateType } from "../../../Redux/store";
+import { RootStateType } from "../../../redux/store";
 import { useSelector, useDispatch } from "react-redux";
-import { removeTask } from "../../../Redux/actions";
+import { removeTask } from "../../../redux/actions";
 import { ThunkDispatch } from "redux-thunk";
 import { AnyAction } from "redux";
 import styles from "./taskActionModal.module.css";

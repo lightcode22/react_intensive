@@ -1,4 +1,4 @@
-import { TaskType } from "../reducers/tasksReducer";
+import { TaskType } from "../../typescript/types/task.types";
 import { DispatchType } from "../store";
 
 const GET_TASKS_API_URL = "https://wtfreactapp.pythonanywhere.com/";

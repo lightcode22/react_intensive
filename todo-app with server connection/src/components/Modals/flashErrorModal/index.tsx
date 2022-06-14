@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { RootStateType } from "../../../Redux/store";
+import { RootStateType } from "../../../redux/store";
 import { useSelector, useDispatch } from "react-redux";
 import styles from "./flashErrorModal.module.css";
 

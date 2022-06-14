@@ -2,10 +2,10 @@ import React, { useState, useRef, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import styles from "./taskEditBlock.module.css";
 import { ThunkDispatch } from "redux-thunk";
-import { RootStateType } from "../../../Redux/store";
+import { RootStateType } from "../../../redux/store";
 import { AnyAction } from "redux";
-import { updateTask } from "../../../Redux/actions";
-import { TaskType } from "../../../Redux/reducers/tasksReducer";
+import { updateTask } from "../../../redux/actions";
+import { TaskType } from "../../../typescript/types/task.types";
 
 type PropsType = {
 	task: TaskType;

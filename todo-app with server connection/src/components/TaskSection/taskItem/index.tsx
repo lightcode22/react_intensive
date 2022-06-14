@@ -3,11 +3,11 @@ import TaskEditBlock from "../taskEditBlock";
 import { useDispatch } from "react-redux";
 import star from "../../../star.svg";
 import TaskControls from "../taskControls";
-import { updateTask } from "../../../Redux/actions";
+import { updateTask } from "../../../redux/actions";
 import { ThunkDispatch } from "redux-thunk";
-import { RootStateType } from "../../../Redux/store";
+import { RootStateType } from "../../../redux/store";
 import { AnyAction } from "redux";
-import { TaskType } from "../../../Redux/reducers/tasksReducer";
+import { TaskType } from "../../../typescript/types/task.types";
 import styles from "./taskItem.module.css";
 
 export default function TaskItem({ task }: { task: TaskType }) {

@@ -3,9 +3,9 @@ import { useDispatch } from "react-redux";
 import plus from "../../plus.svg";
 import styles from "./newTaskForm.module.css";
 import { ThunkDispatch } from "redux-thunk";
-import { RootStateType } from "../../Redux/store";
+import { RootStateType } from "../../redux/store";
 import { AnyAction } from "redux";
-import { addNewTask } from "../../Redux/actions";
+import { addNewTask } from "../../redux/actions";
 
 export default function NewTaskForm() {
 	const [hasError, setHasError] = useState(false);

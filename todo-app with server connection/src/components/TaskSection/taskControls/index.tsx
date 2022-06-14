@@ -4,10 +4,10 @@ import burger from "../../../burger.svg";
 import PopupOverlay from "../../Modals/popupOverlay";
 import styles from "./taskControls.module.css";
 import { ThunkDispatch } from "redux-thunk";
-import { RootStateType } from "../../../Redux/store";
+import { RootStateType } from "../../../redux/store";
 import { AnyAction } from "redux";
-import { updateTask } from "../../../Redux/actions";
-import { TaskType } from "../../../Redux/reducers/tasksReducer";
+import { updateTask } from "../../../redux/actions";
+import { TaskType } from "../../../typescript/types/task.types";
 
 export default function TaskControls({
 	task,

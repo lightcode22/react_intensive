@@ -1,9 +1,9 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { RootStateType } from "../../Redux/store";
+import { RootStateType } from "../../redux/store";
 import { ThunkDispatch } from "redux-thunk";
 import { AnyAction } from "redux";
-import { fetchAllTasks } from "../../Redux/actions";
+import { fetchAllTasks } from "../../redux/actions";
 import Loader from "../Loader";
 import TaskList from "./taskList";
 
