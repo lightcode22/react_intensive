@@ -29,6 +29,8 @@ export default function TaskSection() {
 			if (filter === "favourite") {
 				return task.favourite && !task.completed;
 			}
+
+			return false;
 		});
 	}
 

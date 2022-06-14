@@ -1,20 +1,17 @@
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
-import burger from "../../../burger.svg";
+import burger from "../../../icons/burger.svg";
 import PopupOverlay from "../../Modals/popupOverlay";
 import styles from "./taskControls.module.css";
 import { TaskType } from "../../../typescript/types/task.types";
 
-export default function TaskControls({
-	task,
-	onEditHandler,
-}: {
+type PropsType = {
 	task: TaskType;
 	onEditHandler: () => void;
-}) {
-	const [showDropDown, setShowDropDown] = useState(false);
+};
 
-	const menuRef = useRef(null);
+export default function TaskControls({ task, onEditHandler }: PropsType) {
+	const [showDropDown, setShowDropDown] = useState(false);
 
 	const dispatch = useDispatch();
 
@@ -61,7 +58,6 @@ export default function TaskControls({
 			/>
 
 			<ul
-				ref={menuRef}
 				className={`${styles.dropDown} ${
 					showDropDown ? styles.showDropDown : ""
 				} `}

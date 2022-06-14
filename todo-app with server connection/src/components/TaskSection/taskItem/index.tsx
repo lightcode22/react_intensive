@@ -1,7 +1,7 @@
 import { useState } from "react";
 import TaskEditBlock from "../taskEditBlock";
 import { useDispatch } from "react-redux";
-import star from "../../../star.svg";
+import star from "../../../icons/star.svg";
 import TaskControls from "../taskControls";
 import { updateTask } from "../../../redux/actions";
 import { ThunkDispatch } from "redux-thunk";

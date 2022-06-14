@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import plus from "../../plus.svg";
+import plus from "../../icons/plus.svg";
 import styles from "./newTaskForm.module.css";
 import { ThunkDispatch } from "redux-thunk";
 import { RootStateType } from "../../redux/store";

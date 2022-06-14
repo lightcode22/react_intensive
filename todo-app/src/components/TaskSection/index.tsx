@@ -29,6 +29,8 @@ export default function TaskSection() {
 			if (filter === "favourite") {
 				return task.favourite && !task.completed;
 			}
+
+			return false;
 		});
 	}
 
@@ -38,7 +40,7 @@ export default function TaskSection() {
 		(dispatch as ThunkDispatch<RootStateType, unknown, AnyAction>)(
 			fetchAllTasks()
 		);
-	}, [filter]);
+	}, []);
 
 	return (
 		<section>

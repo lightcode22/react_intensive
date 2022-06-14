@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import plus from "../../plus.svg";
+import plus from "../../icons/plus.svg";
 import styles from "./newTaskForm.module.css";
 
 export default function NewTaskForm() {
@@ -48,7 +48,7 @@ export default function NewTaskForm() {
 						onInput={onInputHandler}
 					/>
 					<button type="submit" className={styles.formButton}>
-						<img src={plus} className={styles.buttonIcon} />
+						<img src={plus} className={styles.buttonIcon} alt="menu_icon" />
 					</button>
 				</div>
 			</form>
