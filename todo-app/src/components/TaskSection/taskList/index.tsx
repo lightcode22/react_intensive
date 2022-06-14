@@ -1,6 +1,6 @@
 import TaskItem from "../taskItem";
 import styles from "./taskList.module.css";
-import { TaskType } from "../../../Redux/reducers/tasksReducer";
+import { TaskType } from "../../../typescript/types/task.types";
 
 export default function TaskList({ tasks }: { tasks: TaskType[] }) {
 	return (

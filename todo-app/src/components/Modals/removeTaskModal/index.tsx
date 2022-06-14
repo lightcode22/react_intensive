@@ -1,4 +1,4 @@
-import { RootStateType } from "../../../Redux/store";
+import { RootStateType } from "../../../redux/store";
 import { useSelector, useDispatch } from "react-redux";
 import styles from "./taskActionModal.module.css";
 

@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import star from "../../../star.svg";
 import TaskControls from "../taskControls";
 import styles from "./taskItem.module.css";
-import { TaskType } from "../../../Redux/reducers/tasksReducer";
+import { TaskType } from "../../../typescript/types/task.types";
 
 export default function TaskItem({ task }: { task: TaskType }) {
 	const status = task.completed ? "done" : "inProgress";

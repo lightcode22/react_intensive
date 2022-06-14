@@ -1,10 +1,4 @@
-export type TaskType = {
-	id: number;
-	title: string;
-	completed: boolean;
-	favourite: boolean;
-	createdOn: Date;
-};
+import { TaskType } from "../../typescript/types/task.types";
 
 type TasksStateType = {
 	allTasks: TaskType[];

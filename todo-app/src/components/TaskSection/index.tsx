@@ -1,8 +1,8 @@
 import { useSelector, useDispatch } from "react-redux";
-import { RootStateType } from "../../Redux/store";
+import { RootStateType } from "../../redux/store";
 import { ThunkDispatch } from "redux-thunk";
 import { AnyAction } from "redux";
-import { fetchAllTasks } from "../../Redux/actions";
+import { fetchAllTasks } from "../../redux/actions";
 import Loader from "../Loader";
 import TaskList from "./taskList";
 import { useEffect } from "react";
@@ -11,10 +11,10 @@ export default function TaskSection() {
 	const isFetching = useSelector(
 		(state: RootStateType) => state.tasks.isFetching
 	);
-	const allTasks = useSelector((state: RootStateType) => state.tasks.allTasks);
+	let tasks = useSelector((state: RootStateType) => state.tasks.allTasks);
 	const filter = useSelector((state: RootStateType) => state.tasks.filter);
 
-	const tasksToShow = allTasks.filter((task) => {
+	tasks = tasks.filter((task) => {
 		if (filter === "done") {
 			return task.completed;
 		}
@@ -33,16 +33,12 @@ export default function TaskSection() {
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		if (allTasks.length === 0 && !isFetching) {
-			(dispatch as ThunkDispatch<RootStateType, unknown, AnyAction>)(
-				fetchAllTasks()
-			);
-		}
-	}, []);
+		(dispatch as ThunkDispatch<RootStateType, unknown, AnyAction>)(
+			fetchAllTasks()
+		);
+	}, [filter]);
 
 	return (
-		<section>
-			{isFetching ? <Loader /> : <TaskList tasks={tasksToShow} />}
-		</section>
+		<section>{isFetching ? <Loader /> : <TaskList tasks={tasks} />}</section>
 	);
 }
