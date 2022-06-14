@@ -27,7 +27,7 @@ const findTaskById = (tasks: TaskType[], id: number) => {
 export default function tasksReducer(
 	state: TasksStateType = initialState,
 	action: ActionType
-) {
+): TasksStateType {
 	if (action.type === "cache_tasks") {
 		const payload = action.payload ? action.payload : [];
 
