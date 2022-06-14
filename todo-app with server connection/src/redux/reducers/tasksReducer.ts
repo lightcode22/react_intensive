@@ -14,13 +14,16 @@ type ActionType = {
 	filter?: string;
 };
 
-const initialState: TasksStateType = {
+const initialState = {
 	allTasks: [],
 	isFetching: false,
 	filter: "",
 };
 
-export default function tasksReducer(state = initialState, action: ActionType) {
+export default function tasksReducer(
+	state: TasksStateType = initialState,
+	action: ActionType
+) {
 	if (action.type === "cache_tasks") {
 		const payload = action.payload ? action.payload : [];
 
@@ -57,7 +60,7 @@ export default function tasksReducer(state = initialState, action: ActionType) {
 			return state;
 		}
 
-		if (action?.filter === state.filter) {
+		if (action.filter === state.filter) {
 			return {
 				...state,
 				filter: "",

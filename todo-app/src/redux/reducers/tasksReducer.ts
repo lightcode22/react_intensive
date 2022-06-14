@@ -14,7 +14,7 @@ type ActionType = {
 	filter?: string;
 };
 
-const initialState: TasksStateType = {
+const initialState = {
 	allTasks: [],
 	isFetching: false,
 	filter: "",
@@ -24,7 +24,10 @@ const findTaskById = (tasks: TaskType[], id: number) => {
 	return tasks.find((task) => task.id === id);
 };
 
-export default function tasksReducer(state = initialState, action: ActionType) {
+export default function tasksReducer(
+	state: TasksStateType = initialState,
+	action: ActionType
+) {
 	if (action.type === "cache_tasks") {
 		const payload = action.payload ? action.payload : [];
 
