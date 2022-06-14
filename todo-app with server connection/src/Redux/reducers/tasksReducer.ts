@@ -59,19 +59,21 @@ export default function tasksReducer(state = initialState, action: ActionType) {
 	}
 
 	if (action.type === "set_filter") {
-		if (action.filter) {
-			if (action.filter === state.filter) {
-				return {
-					...state,
-					filter: "",
-				};
-			}
+		if (!action.filter) {
+			return state;
+		}
 
+		if (action?.filter === state.filter) {
 			return {
 				...state,
-				filter: action.filter,
+				filter: "",
 			};
 		}
+
+		return {
+			...state,
+			filter: action.filter,
+		};
 	}
 
 	return state;

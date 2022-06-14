@@ -41,46 +41,50 @@ export default function tasksReducer(state = initialState, action: ActionType) {
 	}
 
 	if (action.type === "add_new_task") {
-		if (action.title) {
-			let id = 0;
-
-			if (state.allTasks.length !== 0) {
-				id = state.allTasks[state.allTasks.length - 1].id;
-			}
-
-			const newTask = {
-				id: id + 1,
-				title: action.title,
-				completed: false,
-				favourite: false,
-				createdOn: new Date(),
-			};
-
-			return {
-				...state,
-				allTasks: [...state.allTasks, newTask],
-			};
+		if (!action.title) {
+			return state;
 		}
+
+		let id = 0;
+
+		if (state.allTasks.length !== 0) {
+			id = state.allTasks[state.allTasks.length - 1].id;
+		}
+
+		const newTask = {
+			id: id + 1,
+			title: action.title,
+			completed: false,
+			favourite: false,
+			createdOn: new Date(),
+		};
+
+		return {
+			...state,
+			allTasks: [...state.allTasks, newTask],
+		};
 	}
 
 	if (action.type === "edit_task") {
-		if (action.id) {
-			const taskToEdit = findTaskById(state.allTasks, action.id);
+		if (!action.id) {
+			return state;
+		}
 
-			if (taskToEdit) {
-				const updatedTasks = state.allTasks;
+		const taskToEdit = findTaskById(state.allTasks, action.id);
 
-				const index = updatedTasks.indexOf(taskToEdit);
+		if (taskToEdit) {
+			const updatedTasks = state.allTasks;
 
-				if (action.title) {
-					updatedTasks[index].title = action.title;
-				}
+			const index = updatedTasks.indexOf(taskToEdit);
 
-				return {
-					...state,
-					allTasks: [...updatedTasks],
-				};
+			if (action.title) {
+				updatedTasks[index].title = action.title;
 			}
+
+			return {
+				...state,
+				allTasks: [...updatedTasks],
+			};
 		}
 	}
 
@@ -99,77 +103,85 @@ export default function tasksReducer(state = initialState, action: ActionType) {
 	}
 
 	if (action.type === "set_filter") {
-		if (action.filter) {
-			if (action.filter === state.filter) {
-				return {
-					...state,
-					filter: "",
-				};
-			}
+		if (!action.filter) {
+			return state;
+		}
+
+		if (action.filter === state.filter) {
+			return {
+				...state,
+				filter: "",
+			};
+		}
+
+		return {
+			...state,
+			filter: action.filter,
+		};
+	}
+
+	if (action.type === "switch_favourite_status") {
+		if (!action.id) {
+			return state;
+		}
+
+		const taskToEdit = findTaskById(state.allTasks, action.id);
+
+		if (taskToEdit) {
+			const updatedTasks = state.allTasks;
+
+			const index = updatedTasks.indexOf(taskToEdit);
+
+			updatedTasks[index].favourite = !updatedTasks[index].favourite;
 
 			return {
 				...state,
-				filter: action.filter,
+				allTasks: [...updatedTasks],
 			};
 		}
 	}
 
-	if (action.type === "switch_favourite_status") {
-		if (action.id) {
-			const taskToEdit = findTaskById(state.allTasks, action.id);
-
-			if (taskToEdit) {
-				const updatedTasks = state.allTasks;
-
-				const index = updatedTasks.indexOf(taskToEdit);
-
-				updatedTasks[index].favourite = !updatedTasks[index].favourite;
-
-				return {
-					...state,
-					allTasks: [...updatedTasks],
-				};
-			}
-		}
-	}
-
 	if (action.type === "switch_completed_status") {
-		if (action.id) {
-			const taskToEdit = findTaskById(state.allTasks, action.id);
+		if (!action.id) {
+			return state;
+		}
 
-			if (taskToEdit) {
-				const updatedTasks = state.allTasks;
+		const taskToEdit = findTaskById(state.allTasks, action.id);
 
-				const index = updatedTasks.indexOf(taskToEdit);
+		if (taskToEdit) {
+			const updatedTasks = state.allTasks;
 
-				updatedTasks[index].completed = !updatedTasks[index].completed;
+			const index = updatedTasks.indexOf(taskToEdit);
 
-				return {
-					...state,
-					allTasks: [...updatedTasks],
-				};
-			}
+			updatedTasks[index].completed = !updatedTasks[index].completed;
+
+			return {
+				...state,
+				allTasks: [...updatedTasks],
+			};
 		}
 	}
 
 	if (action.type === "remove_task") {
-		if (action.id) {
-			const taskToRemove = findTaskById(state.allTasks, action.id);
+		if (!action.id) {
+			return state;
+		}
 
-			if (taskToRemove) {
-				const updatedTasks = state.allTasks;
+		const taskToRemove = findTaskById(state.allTasks, action.id);
 
-				const index = updatedTasks.indexOf(taskToRemove);
+		if (taskToRemove) {
+			const updatedTasks = state.allTasks;
 
-				if (index !== -1) {
-					updatedTasks.splice(index, 1);
-				}
+			const index = updatedTasks.indexOf(taskToRemove);
 
-				return {
-					...state,
-					allTasks: [...updatedTasks],
-				};
+			if (index !== -1) {
+				updatedTasks.splice(index, 1);
 			}
+
+			return {
+				...state,
+				allTasks: [...updatedTasks],
+			};
 		}
 	}
 
