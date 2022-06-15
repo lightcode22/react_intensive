@@ -29,7 +29,7 @@ export default function taskActionReducer(
 		};
 	}
 
-	if (action.type === "close_action_modal") {
+	if (action.type === "close_remove_modal") {
 		return {
 			...state,
 			isOpen: false,

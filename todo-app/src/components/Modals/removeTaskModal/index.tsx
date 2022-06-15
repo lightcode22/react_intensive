@@ -15,12 +15,12 @@ export default function TaskActionModal() {
 	if (!isOpen) return null;
 
 	const onCloseHandler = () => {
-		dispatch({ type: "close_action_modal" });
+		dispatch({ type: "close_remove_modal" });
 	};
 
 	const onRemoveTaskHandler = () => {
 		dispatch({ type: "remove_task", id });
-		dispatch({ type: "close_action_modal" });
+		dispatch({ type: "close_remove_modal" });
 	};
 
 	return (
