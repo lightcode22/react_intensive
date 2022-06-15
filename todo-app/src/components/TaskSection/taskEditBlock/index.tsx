@@ -36,7 +36,7 @@ export default function TaskEditBlock({
 
 	const onKeyDownHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
 		if (e.key === "Enter") {
-			if (!hasError) {
+			if (!hasError && inputText.trim() !== "") {
 				dispatch({ type: "edit_task", id, title: inputText });
 				onSubmitHander();
 			}

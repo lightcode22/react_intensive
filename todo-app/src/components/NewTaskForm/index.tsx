@@ -22,9 +22,8 @@ export default function NewTaskForm() {
 	const onSubmitHandler = (e: React.FormEvent) => {
 		e.preventDefault();
 
-		if (!hasError) {
-			const title = inputText;
-			dispatch({ type: "add_new_task", title });
+		if (!hasError && inputText.trim() !== "") {
+			dispatch({ type: "add_new_task", title: inputText });
 			setInputText("");
 		}
 	};

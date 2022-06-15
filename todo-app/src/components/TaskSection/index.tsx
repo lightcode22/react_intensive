@@ -6,6 +6,17 @@ import { fetchAllTasks } from "../../redux/actions";
 import Loader from "../Loader";
 import TaskList from "./taskList";
 import { useEffect } from "react";
+import { TaskType } from "../../typescript/types/task.types";
+
+type FiltersType = {
+	[key: string]: (arg: TaskType) => boolean;
+};
+
+const filters: FiltersType = {
+	done: (task: TaskType) => task.completed,
+	inProcess: (task: TaskType) => !task.completed,
+	favourite: (task: TaskType) => task.favourite && !task.completed,
+};
 
 export default function TaskSection() {
 	const isFetching = useSelector(
@@ -19,20 +30,8 @@ export default function TaskSection() {
 			return allTasks;
 		}
 
-		return allTasks.filter((task) => {
-			if (filter === "done") {
-				return task.completed;
-			}
-
-			if (filter === "inProcess") {
-				return !task.completed;
-			}
-
-			if (filter === "favourite") {
-				return task.favourite && !task.completed;
-			}
-			return false;
-		});
+		const filterFunc = filters[filter];
+		return allTasks.filter(filterFunc);
 	};
 
 	const dispatch = useDispatch();

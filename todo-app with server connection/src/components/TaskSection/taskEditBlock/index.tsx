@@ -36,7 +36,7 @@ export default function TaskEditBlock({ task, onSubmitHander }: PropsType) {
 
 	const onKeyDownHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
 		if (e.key === "Enter") {
-			if (!hasError) {
+			if (!hasError && inputText.trim() !== "") {
 				(dispatch as ThunkDispatch<RootStateType, unknown, AnyAction>)(
 					updateTask({ ...task, title: inputText })
 				);

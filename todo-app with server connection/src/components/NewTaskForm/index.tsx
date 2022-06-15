@@ -26,10 +26,9 @@ export default function NewTaskForm() {
 	const onSubmitHandler = (e: React.FormEvent) => {
 		e.preventDefault();
 
-		if (!hasError) {
-			const title = inputText;
+		if (!hasError && inputText.trim() !== "") {
 			(dispatch as ThunkDispatch<RootStateType, unknown, AnyAction>)(
-				addNewTask(title)
+				addNewTask(inputText)
 			);
 			setInputText("");
 		}
