@@ -14,10 +14,12 @@ export default function TaskSection() {
 	const allTasks = useSelector((state: RootStateType) => state.tasks.allTasks);
 	const filter = useSelector((state: RootStateType) => state.tasks.filter);
 
-	let tasksToDisplay = allTasks;
+	const tasksToDisplay = () => {
+		if (filter === "") {
+			return allTasks;
+		}
 
-	if (filter !== "") {
-		tasksToDisplay = allTasks.filter((task) => {
+		return allTasks.filter((task) => {
 			if (filter === "done") {
 				return task.completed;
 			}
@@ -29,10 +31,9 @@ export default function TaskSection() {
 			if (filter === "favourite") {
 				return task.favourite && !task.completed;
 			}
-
 			return false;
 		});
-	}
+	};
 
 	const dispatch = useDispatch();
 
@@ -44,7 +45,7 @@ export default function TaskSection() {
 
 	return (
 		<section>
-			{isFetching ? <Loader /> : <TaskList tasks={tasksToDisplay} />}
+			{isFetching ? <Loader /> : <TaskList tasks={tasksToDisplay()} />}
 		</section>
 	);
 }
