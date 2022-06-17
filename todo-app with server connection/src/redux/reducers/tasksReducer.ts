@@ -27,17 +27,9 @@ export default function tasksReducer(
 	if (action.type === "cache_tasks") {
 		const payload = action.payload ? action.payload : [];
 
-		const dataObject = payload.map((el) => ({
-			id: el[0],
-			title: el[1],
-			completed: Boolean(el[2]),
-			favourite: Boolean(el[3]),
-			createdOn: el[4],
-		}));
-
 		return {
 			...state,
-			allTasks: [...dataObject],
+			allTasks: payload,
 		};
 	}
 
